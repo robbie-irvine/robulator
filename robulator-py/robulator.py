@@ -17,4 +17,6 @@ def t_NUMBER(t):
 
 lexer = lex()
 
-input("Enter your calculation here:\n")
+calc = input("Enter your calculation here:\n")
+
+# TODO: make lexer run with input
