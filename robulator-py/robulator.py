@@ -15,6 +15,11 @@ def t_NUMBER(t):
     t.value = int(t.value)
     return t
 
+# Error handling rule
+def t_error(t):
+    print("Illegal character '%s'" % t.value[0])
+    t.lexer.skip(1)
+
 lexer = lex.lex()
 
 calc = input("Enter your calculation here:\n")
