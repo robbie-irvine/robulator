@@ -4,11 +4,21 @@ from ply import yacc
 tokens = (
     'NUMBER',
     'PLUS',
+    'MINUS',
+    'MULT',
+    'DIV',
+    'LBRA',
+    'RBRA',
 )
 
 t_ignore_SPACE = r'[ \t]'
 
 t_PLUS  = r'\+'
+t_MINUS  = r'-'
+t_MULT = r'\*'
+t_DIV = r'/'
+t_LBRA = r'\('
+t_RBRA = r'\)'
 
 def t_NUMBER(t):
     r'\d+'
