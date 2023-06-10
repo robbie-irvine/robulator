@@ -6,7 +6,7 @@ tokens = (
     'PLUS',
 )
 
-t_ignore_SPACE = r' \t'
+t_ignore_SPACE = r'[ \t]'
 
 t_PLUS  = r'\+'
 
