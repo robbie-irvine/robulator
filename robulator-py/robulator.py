@@ -32,16 +32,16 @@ def t_error(t):
 
 lexer = lex.lex()
 
-def p_operation(p):
-    '''operation : operation PLUS value
-        | operation MINUS value'''
+def p_expression(p):
+    '''expression : expression PLUS component
+        | expression MINUS component'''
     if p[2] == "+":
         p[0] = p[1] + p[3]
     elif p[2] == "-":
         p[0] = p[1] - p[3]
 
-def p_operation_value(p):
-    'operation : value'
+def p_expression_comp(p):
+    'expression : component'
     p[0] = p[1]
 
 def p_value(p):
@@ -54,6 +54,26 @@ def p_value(p):
         p[0] = -(p[2])
     else:
         p[0] = p[1]
+
+def p_factor(p):
+    '''factor : value
+    | LBRA expression RBRA'''
+    if p[1] == "(":
+        p[0] = (p[2])
+    else:
+        p[0] = p[1]
+
+def p_component(p):
+    '''component : component MULT factor
+        | component DIV factor'''
+    if p[2] == "*":
+        p[0] = p[1] * p[3]
+    elif p[2] == "/":
+        p[0] = p[1] / p[3]
+
+def p_component_factor(p):
+    'component : factor'
+    p[0] = p[1]
 
 parser = yacc.yacc()
 
