@@ -32,12 +32,30 @@ def t_error(t):
 
 lexer = lex.lex()
 
-calc = input("Enter your calculation here:\n")
+def p_operation(p):
+    '''operation : operation PLUS value
+        | operation MINUS value'''
+    if p[2] == "+":
+        p[0] = p[1] + p[3]
+    elif p[2] == "-":
+        p[0] = p[1] - p[3]
 
-lexer.input(calc)
+def p_operation_value(p):
+    'operation : value'
+    p[0] = p[1]
+
+def p_value(p):
+    'value : NUMBER'
+    p[0] = p[1]
+
+parser = yacc.yacc()
 
 while True:
-    tok = lexer.token()
-    if not tok:
+    try:
+        calc = input("Enter your calculation here:\n")
+    except EOFError:
         break
-    print(tok)
+    if not calc: continue
+    result = parser.parse(calc)
+    print(result)
+
