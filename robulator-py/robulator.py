@@ -45,8 +45,15 @@ def p_operation_value(p):
     p[0] = p[1]
 
 def p_value(p):
-    'value : NUMBER'
-    p[0] = p[1]
+    '''value : NUMBER
+    | PLUS NUMBER 
+    | MINUS NUMBER'''
+    if p[1] == "+":
+        p[0] = p[2]
+    elif p[1] == "-":
+        p[0] = -(p[2])
+    else:
+        p[0] = p[1]
 
 parser = yacc.yacc()
 
